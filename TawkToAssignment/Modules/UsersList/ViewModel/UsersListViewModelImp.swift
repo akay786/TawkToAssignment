@@ -10,6 +10,8 @@ import Foundation
 class UsersListViewModelImp: UsersListViewModel {
     
     private var users = [User]()
+    private var searchedUsers = [User]()
+    private var isSearching = false
     private var cellViewModels = [BaseUserListCellViewModel]()
     
     private var since = 0
@@ -25,6 +27,8 @@ class UsersListViewModelImp: UsersListViewModel {
     init(users: [User], service: UsersService) {
         self.service = service
         self.users = users
+        self.since = UserDefaultsManager.shared.getSinceValue()
+        self.fetchSavedUserList()
         self.fetchUsersList()
     }
     
@@ -45,8 +49,11 @@ class UsersListViewModelImp: UsersListViewModel {
     }
     
     func fetchUsers() {
-        if !self.isApiCalled {
-            self.fetchUsersList()
+        if !self.isApiCalled && !self.isSearching {
+            ///If internet is connected then fetch list
+            if Reachability.isConnectedToNetwork() {
+                self.fetchUsersList()
+            }
         }
     }
     
@@ -57,11 +64,25 @@ class UsersListViewModelImp: UsersListViewModel {
     func appendCellViewModels(for users: [User]) {
         for user in users {
             let vm = NormalUserListingCellViewModel(userName: user.login ?? "",
-                                                    userType: user.type?.rawValue ?? "",
+                                                    userType: user.type ?? "",
                                                     imageURL: URL(string: user.avatarURL ?? ""))
             self.cellViewModels.append(vm)
         }
         self.completionHandler?(.refreshData)
+    }
+    
+    func searchUser(text: String) {
+        self.cellViewModels = []
+        self.isSearching = !text.isEmpty
+        if text.isEmpty {
+            self.appendCellViewModels(for: self.users)
+            
+        } else {
+            self.searchedUsers = []
+            let list = self.users.filter({ $0.login?.contains(text) ?? false })
+            self.searchedUsers.append(contentsOf: list)
+            self.appendCellViewModels(for: self.searchedUsers)
+        }
     }
     
 }
@@ -70,35 +91,49 @@ class UsersListViewModelImp: UsersListViewModel {
 //MARK: - Api Call
 extension UsersListViewModelImp {
     
+    private func refreshData(_ users: [User]) {
+        self.users.append(contentsOf: users)
+        self.appendCellViewModels(for: users)
+    }
+ 
+    private func fetchSavedUserList() {
+        self.service.fetchLocalUserList { [weak self] users in
+            self?.refreshData(users ?? [])
+        }
+    }
+    
     private func fetchUsersList() {
         completionHandler?(.showLoader)
         self.isApiCalled = true
+        
         self.service.getUsersList(since: self.since) { [weak self] result in
-            
+
             guard let `self` = self else {
                 return
             }
-            
+
             self.isApiCalled = false
-            
+
             self.completionHandler?(.hideLoader)
-            
+
             switch result {
-            
+
             case .success(let users):
-                self.users.append(contentsOf: users)
-                self.since = users.last?.id ?? 0
-                self.appendCellViewModels(for: users)
                 self.completionHandler?(.hideEmptyView)
+                self.since = Int(users.last?.id ?? 0)
+                UserDefaultsManager.shared.saveLastSinceValue(self.since)
+                self.refreshData(users)
                 
                 break
-                
+
             case .failure(_):
-                self.completionHandler?(.showEmptyView)
-                
+                if self.users.count == 0 {
+                    self.completionHandler?(.showEmptyView)
+                    self.completionHandler?(.refreshData)
+                }
             }
-            
-            self.completionHandler?(.refreshData)
         }
     }
+    
+    
 }

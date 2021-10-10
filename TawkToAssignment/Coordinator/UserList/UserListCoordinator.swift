@@ -6,24 +6,26 @@
 //
 
 import UIKit
+import CoreData
 
 class UserListCoordinator: Coordinator {
     
     private var rootViewController: UINavigationController!
-    //private var addTvShowCoordinator : AddTvShowCoordinator!
+    private var container : NSPersistentContainer
     private var dataStore : DataStore
     
     
     //MARK: - Initializer
-    init( dataStore : DataStore) {
+    init( dataStore : DataStore, container: NSPersistentContainer) {
         self.dataStore = dataStore
+        self.container = container
     }
     
     func start() -> UIViewController {
         if let usersListVC = UserListCoordinator.instantiateViewController() as? UsersListViewController {
             rootViewController = BaseNavigationController(rootViewController: usersListVC)
             
-            let service = UsersServiceImp(dataStore: self.dataStore)
+            let service = UsersServiceImp(dataStore: self.dataStore, persistentContainer: container)
             let viewModel = UsersListViewModelImp(users: [], service: service)
             viewModel.coordinatorDelegate = self
             usersListVC.viewModel = viewModel
@@ -43,7 +45,8 @@ extension UserListCoordinator : UsersListViewModelCoordinatorDelegate{
         
         let userProfileCoordinator = UserProfileCoordinator(navigationController: self.rootViewController,
                                                     dataStore: self.dataStore,
-                                                    user: user)
+                                                    user: user,
+                                                    persistentContainer: self.container)
         if let userProfileVC = userProfileCoordinator.start() as? UserProfileViewController {
             //userProfileVC.viewModel.delegate = delegate
             self.rootViewController.pushViewController(userProfileVC, animated: true)

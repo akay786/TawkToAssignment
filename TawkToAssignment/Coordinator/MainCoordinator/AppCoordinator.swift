@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 protocol Coordinator {
     func start() -> UIViewController
@@ -22,17 +23,18 @@ final class AppCoordinator: Coordinator {
     private var window : UIWindow?
 
     var userListCoordinator: UserListCoordinator?
-    
+    var persistentContainer: NSPersistentContainer
 
     //MARK: - Initializer
-    init(window : UIWindow?) {
+    init(window : UIWindow?, container: NSPersistentContainer ) {
         self.window = window
+        self.persistentContainer = container
     }
     
     
     @discardableResult
     func start() -> UIViewController {
-        userListCoordinator = UserListCoordinator(dataStore: self.dataStore)
+        userListCoordinator = UserListCoordinator(dataStore: self.dataStore, container: self.persistentContainer)
         let mainVC = userListCoordinator?.start()
         self.window?.rootViewController = mainVC
         self.window?.makeKeyAndVisible()

@@ -23,6 +23,7 @@ class UsersListViewController: UIViewController {
         self.setupTableView()
         self.bindViewModel()
         self.title = viewModel?.title
+        self.usersListingView.searchView.delegate = self
         
     }
 
@@ -123,3 +124,17 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+
+extension UsersListViewController: SearchViewDelegate {
+    
+    func searchText(text: String) {
+        self.viewModel?.searchUser(text: text)
+    }
+    
+    func emptyText() {
+            
+    }
+    
+    
+    
+}

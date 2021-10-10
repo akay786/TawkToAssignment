@@ -20,8 +20,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IvM-oB-zRC">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HXn-kj-fF0" customClass="SearchBar" customModule="TawkToAssignment" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="40" width="382" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="hep-ic-Y9L"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="enableSearch" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Search User"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TaL-aU-EFQ">
-                                        <rect key="frame" x="16" y="50" width="382" height="796"/>
+                                        <rect key="frame" x="16" y="120" width="382" height="726"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KK9-0b-zGZ">
@@ -54,15 +65,18 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="RSi-1V-8sl" firstAttribute="centerX" secondItem="IvM-oB-zRC" secondAttribute="centerX" id="1YS-by-cK8"/>
+                                    <constraint firstItem="HXn-kj-fF0" firstAttribute="leading" secondItem="IvM-oB-zRC" secondAttribute="leading" constant="16" id="4ab-Ey-zov"/>
                                     <constraint firstAttribute="bottom" secondItem="TaL-aU-EFQ" secondAttribute="bottom" constant="16" id="994-g6-nAu"/>
+                                    <constraint firstAttribute="trailing" secondItem="HXn-kj-fF0" secondAttribute="trailing" constant="16" id="9mn-MP-tPU"/>
                                     <constraint firstItem="KK9-0b-zGZ" firstAttribute="centerY" secondItem="IvM-oB-zRC" secondAttribute="centerY" id="G7g-tU-46Q"/>
+                                    <constraint firstItem="HXn-kj-fF0" firstAttribute="top" secondItem="IvM-oB-zRC" secondAttribute="top" constant="40" id="OvZ-Hp-feB"/>
                                     <constraint firstItem="RSi-1V-8sl" firstAttribute="centerY" secondItem="IvM-oB-zRC" secondAttribute="centerY" id="WkO-Q1-Gc2"/>
                                     <constraint firstItem="KK9-0b-zGZ" firstAttribute="centerX" secondItem="IvM-oB-zRC" secondAttribute="centerX" id="dK7-y4-FUU"/>
-                                    <constraint firstItem="TaL-aU-EFQ" firstAttribute="top" secondItem="IvM-oB-zRC" secondAttribute="top" constant="50" id="eTE-dA-hoo"/>
                                     <constraint firstAttribute="trailing" secondItem="KK9-0b-zGZ" secondAttribute="trailing" constant="20" id="m3U-mM-Gnh"/>
                                     <constraint firstAttribute="trailing" secondItem="TaL-aU-EFQ" secondAttribute="trailing" constant="16" id="ni1-EI-aLb"/>
                                     <constraint firstItem="TaL-aU-EFQ" firstAttribute="leading" secondItem="IvM-oB-zRC" secondAttribute="leading" constant="16" id="ocm-nA-85H"/>
                                     <constraint firstItem="KK9-0b-zGZ" firstAttribute="leading" secondItem="IvM-oB-zRC" secondAttribute="leading" constant="20" id="tp2-Rk-z3M"/>
+                                    <constraint firstItem="TaL-aU-EFQ" firstAttribute="top" secondItem="HXn-kj-fF0" secondAttribute="bottom" constant="30" id="xRQ-qd-Q81"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -79,6 +93,7 @@
                             <outlet property="emptyListView" destination="KK9-0b-zGZ" id="F5J-hL-NFC"/>
                             <outlet property="emptyViewTitleLabel" destination="AO3-ND-TS4" id="YsU-O7-tGe"/>
                             <outlet property="outerView" destination="IvM-oB-zRC" id="Xx8-Xp-0ro"/>
+                            <outlet property="searchView" destination="HXn-kj-fF0" id="SqK-Yq-ler"/>
                             <outlet property="tableView" destination="TaL-aU-EFQ" id="hrC-V8-i9g"/>
                         </connections>
                     </view>
@@ -88,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-196" y="119"/>
+            <point key="canvasLocation" x="-197.10144927536234" y="118.52678571428571"/>
         </scene>
         <!--User Profile View Controller-->
         <scene sceneID="fZb-h8-JSR">

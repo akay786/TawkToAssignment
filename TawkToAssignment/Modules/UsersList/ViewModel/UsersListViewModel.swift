@@ -23,7 +23,8 @@ protocol UsersListViewModel {
     var numberOfRows: Int { get }
     
     func getCellVMAt(index: Int) -> BaseUserListCellViewModel
-    func fetchUsers() 
+    func fetchUsers()
+    func searchUser(text: String)
     func tappedAtCell(index: Int)
 }
 
@@ -33,4 +34,5 @@ enum UsersListViewModelOutput {
     case refreshData
     case showEmptyView
     case hideEmptyView
+    
 }

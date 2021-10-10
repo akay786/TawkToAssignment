@@ -9,6 +9,9 @@ import UIKit
 
 class UsersListingView: UIView {
 
+    @IBOutlet weak var searchView: SearchBar!
+    
+    
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.tableFooterView = UIView()

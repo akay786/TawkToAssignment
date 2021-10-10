@@ -6,66 +6,47 @@
 //
 
 import Foundation
+import CoreData
 
-class User: Codable {
+public extension CodingUserInfoKey {
+    // Helper property to retrieve the context
+    static let managedObjectContext = CodingUserInfoKey(rawValue: "managedContextObject")
+}
+
+class User: NSManagedObject, Decodable {
     
-    var login: String?
-    var id: Int?
-    var nodeID: String?
-    var avatarURL: String?
-    var gravatarID: String?
-    var url, htmlURL, followersURL: String?
-    var followingURL, gistsURL, starredURL: String?
-    var subscriptionsURL, organizationsURL, reposURL: String?
-    var eventsURL: String?
-    var receivedEventsURL: String?
-    var type: TypeEnum?
-    var siteAdmin: Bool?
+    @NSManaged var login: String?
+    @NSManaged var id: Int16
+    @NSManaged var avatarURL: String?
+    @NSManaged var type: String?
+    @NSManaged var siteAdmin: Bool
 
     enum CodingKeys: String, CodingKey {
-        case login, id
-        case nodeID = "node_id"
+        case login
+        case id
         case avatarURL = "avatar_url"
-        case gravatarID = "gravatar_id"
-        case url
-        case htmlURL = "html_url"
-        case followersURL = "followers_url"
-        case followingURL = "following_url"
-        case gistsURL = "gists_url"
-        case starredURL = "starred_url"
-        case subscriptionsURL = "subscriptions_url"
-        case organizationsURL = "organizations_url"
-        case reposURL = "repos_url"
-        case eventsURL = "events_url"
-        case receivedEventsURL = "received_events_url"
         case type
         case siteAdmin = "site_admin"
     }
+    
+    required convenience init(from decoder: Decoder) throws {
+        guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
+              let managedObjectContext = decoder.userInfo[codingUserInfoKeyManagedObjectContext] as? NSManagedObjectContext,
+              let entity = NSEntityDescription.entity(forEntityName: "User", in: managedObjectContext) else {
 
-    init(login: String?, id: Int?, nodeID: String?, avatarURL: String?, gravatarID: String?, url: String?, htmlURL: String?, followersURL: String?, followingURL: String?, gistsURL: String?, starredURL: String?, subscriptionsURL: String?, organizationsURL: String?, reposURL: String?, eventsURL: String?, receivedEventsURL: String?, type: TypeEnum?, siteAdmin: Bool?) {
-        self.login = login
-        self.id = id
-        self.nodeID = nodeID
-        self.avatarURL = avatarURL
-        self.gravatarID = gravatarID
-        self.url = url
-        self.htmlURL = htmlURL
-        self.followersURL = followersURL
-        self.followingURL = followingURL
-        self.gistsURL = gistsURL
-        self.starredURL = starredURL
-        self.subscriptionsURL = subscriptionsURL
-        self.organizationsURL = organizationsURL
-        self.reposURL = reposURL
-        self.eventsURL = eventsURL
-        self.receivedEventsURL = receivedEventsURL
-        self.type = type
-        self.siteAdmin = siteAdmin
+            fatalError("Failed to decode User")
+        }
+        
+        self.init(entity: entity, insertInto: managedObjectContext)
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.login = try container.decodeIfPresent(String.self, forKey: .login)
+        let ID = try container.decodeIfPresent(Int.self, forKey: .id) ?? 0
+        self.id = Int16(ID)
+        self.avatarURL = try container.decodeIfPresent(String.self, forKey: .avatarURL)
+        self.type = try container.decodeIfPresent(String.self, forKey: .type)
+        self.siteAdmin = try container.decodeIfPresent(Bool.self, forKey: .siteAdmin) ?? false
     }
+        
 }
-
-enum TypeEnum: String, Codable {
-    case organization = "Organization"
-    case user = "User"
-}
-

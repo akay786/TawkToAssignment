@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import UIKit
+import CoreData
 
 enum NetworkError: String, Error {
     case serverError = "Server Error"
@@ -13,11 +15,29 @@ enum NetworkError: String, Error {
 }
 
 protocol DataStore {
-    func getUsersList(since: Int, completionHandler: @escaping (Result<[User], NetworkError>) -> Void)
+    func getUsersList(since: Int, persistentContainer: NSPersistentContainer, completionHandler: @escaping (Result<Data, NetworkError>) -> Void)
     func getUserProfile(userName: String, completionHandler: @escaping (Result<UserProfile, NetworkError>) -> Void)
 }
 
 class DataStoreImp: DataStore {
+    
+//    func saveInDatabase(jsonData: Data, completion: @escaping(_ users: [User]?) -> ()) {
+//        do {
+//            if let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext {
+//                let managedObjectContext = delegate.persistentContainer.viewContext
+//                let decoder = JSONDecoder()
+//                decoder.userInfo[codingUserInfoKeyManagedObjectContext] = managedObjectContext
+//                let users = try decoder.decode([User].self, from: jsonData)
+//                try managedObjectContext.save()
+//                completion(users)
+//            }
+//
+//        } catch let error {
+//            print(error)
+//        }
+//
+//        completion(nil)
+//    }
     
     func getUserProfile(userName: String, completionHandler: @escaping (Result<UserProfile, NetworkError>) -> Void) {
         
@@ -56,7 +76,7 @@ class DataStoreImp: DataStore {
     /// This function returns users list from server.
     ///
     /// - Returns: A saved tv object array if successfully fetched and error object if failed
-    func getUsersList(since: Int, completionHandler: @escaping (Result<[User], NetworkError>) -> Void) {
+    func getUsersList(since: Int, persistentContainer: NSPersistentContainer, completionHandler: @escaping (Result<Data, NetworkError>) -> Void) {
         
         let urlComponents = NSURLComponents(string: AppConstants.EndPoints.getAllUsers)
         urlComponents?.queryItems = [
@@ -80,10 +100,7 @@ class DataStoreImp: DataStore {
             }
             
             do {
-                
-                let usersList = try JSONDecoder().decode([User].self, from: data)
-                completionHandler(.success(usersList))
-                
+                completionHandler(.success(data))
                 
             } catch _ {
                 completionHandler(.failure(.parsinError))

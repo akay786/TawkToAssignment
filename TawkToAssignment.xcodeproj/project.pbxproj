@@ -48,6 +48,10 @@
 		20B9F6EE271353190017A67D /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B9F6ED271353190017A67D /* UserProfileViewModel.swift */; };
 		20B9F6F6271353240017A67D /* UserProfileViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B9F6F5271353240017A67D /* UserProfileViewModelImpl.swift */; };
 		20B9F6FE271357440017A67D /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B9F6FD271357440017A67D /* UserProfile.swift */; };
+		20B9F70427137B4E0017A67D /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B9F70327137B4E0017A67D /* UserDefaultsManager.swift */; };
+		20B9F71927137F200017A67D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B9F71827137F200017A67D /* Reachability.swift */; };
+		20B9F722271382E00017A67D /* SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20B9F721271382E00017A67D /* SearchBar.xib */; };
+		20B9F727271383650017A67D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B9F726271383650017A67D /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +119,10 @@
 		20B9F6ED271353190017A67D /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		20B9F6F5271353240017A67D /* UserProfileViewModelImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModelImpl.swift; sourceTree = "<group>"; };
 		20B9F6FD271357440017A67D /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		20B9F70327137B4E0017A67D /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		20B9F71827137F200017A67D /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		20B9F721271382E00017A67D /* SearchBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchBar.xib; sourceTree = "<group>"; };
+		20B9F726271383650017A67D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +173,7 @@
 		20455DCD270C55DB00CE1B37 /* TawkToAssignment */ = {
 			isa = PBXGroup;
 			children = (
+				20B9F720271382A90017A67D /* CustomViews */,
 				20B9F65C2712ED730017A67D /* Models */,
 				20455E4D270C5AA300CE1B37 /* Coordinator */,
 				20455E4C270C5A9600CE1B37 /* Modules */,
@@ -220,6 +229,8 @@
 			isa = PBXGroup;
 			children = (
 				20455E1E270C599600CE1B37 /* AppConstants.swift */,
+				20B9F70327137B4E0017A67D /* UserDefaultsManager.swift */,
+				20B9F71827137F200017A67D /* Reachability.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -395,6 +406,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		20B9F720271382A90017A67D /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				20B9F721271382E00017A67D /* SearchBar.xib */,
+				20B9F726271383650017A67D /* SearchBar.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -498,6 +518,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20B9F722271382E00017A67D /* SearchBar.xib in Resources */,
 				20B9F6C0271311880017A67D /* NormalUserListingCell.xib in Resources */,
 				20455DDE270C55DE00CE1B37 /* LaunchScreen.storyboard in Resources */,
 				20455DDB270C55DE00CE1B37 /* Assets.xcassets in Resources */,
@@ -530,8 +551,10 @@
 			files = (
 				20B9F6822712F6780017A67D /* BaseNavigation.swift in Sources */,
 				20B9F6D22713230B0017A67D /* UIImageView.swift in Sources */,
+				20B9F70427137B4E0017A67D /* UserDefaultsManager.swift in Sources */,
 				20455E39270C5A0600CE1B37 /* UIColor.swift in Sources */,
 				20455E0F270C591100CE1B37 /* AppCoordinator.swift in Sources */,
+				20B9F727271383650017A67D /* SearchBar.swift in Sources */,
 				20B9F6B8271311700017A67D /* InvertedUserListingCellViewModel.swift in Sources */,
 				20B9F6FE271357440017A67D /* UserProfile.swift in Sources */,
 				20B9F695271310C50017A67D /* Configuration.swift in Sources */,
@@ -555,6 +578,7 @@
 				20B9F6A8271311210017A67D /* NoteUserListingCellViewModel.swift in Sources */,
 				20B9F65E2712ED860017A67D /* User.swift in Sources */,
 				20B9F6C8271311940017A67D /* NormalUserListingCellViewModel.swift in Sources */,
+				20B9F71927137F200017A67D /* Reachability.swift in Sources */,
 				20B9F6E32713289D0017A67D /* UserProfileView.swift in Sources */,
 				20B9F6CD271311DD0017A67D /* UITableView.swift in Sources */,
 				20B9F6E8271328BC0017A67D /* UserProfileCoordinator.swift in Sources */,
@@ -742,7 +766,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.amitbiswas.TawkToAssignment;
+				PRODUCT_BUNDLE_IDENTIFIER = com.awais.TawkToAssignment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -760,7 +784,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.amitbiswas.TawkToAssignment;
+				PRODUCT_BUNDLE_IDENTIFIER = com.awais.TawkToAssignment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
