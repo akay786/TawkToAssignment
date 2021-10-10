@@ -16,30 +16,12 @@ enum NetworkError: String, Error {
 
 protocol DataStore {
     func getUsersList(since: Int, persistentContainer: NSPersistentContainer, completionHandler: @escaping (Result<Data, NetworkError>) -> Void)
-    func getUserProfile(userName: String, completionHandler: @escaping (Result<UserProfile, NetworkError>) -> Void)
+    func getUserProfile(userName: String, completionHandler: @escaping (Result<Data, NetworkError>) -> Void)
 }
 
 class DataStoreImp: DataStore {
     
-//    func saveInDatabase(jsonData: Data, completion: @escaping(_ users: [User]?) -> ()) {
-//        do {
-//            if let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext {
-//                let managedObjectContext = delegate.persistentContainer.viewContext
-//                let decoder = JSONDecoder()
-//                decoder.userInfo[codingUserInfoKeyManagedObjectContext] = managedObjectContext
-//                let users = try decoder.decode([User].self, from: jsonData)
-//                try managedObjectContext.save()
-//                completion(users)
-//            }
-//
-//        } catch let error {
-//            print(error)
-//        }
-//
-//        completion(nil)
-//    }
-    
-    func getUserProfile(userName: String, completionHandler: @escaping (Result<UserProfile, NetworkError>) -> Void) {
+    func getUserProfile(userName: String, completionHandler: @escaping (Result<Data, NetworkError>) -> Void) {
         
         let urlString = String.init(format: "%@%@", AppConstants.EndPoints.getUserProfile,userName)
         
@@ -57,16 +39,7 @@ class DataStoreImp: DataStore {
                 return
             }
             
-            do {
-                
-                let userProfile = try JSONDecoder().decode(UserProfile.self, from: data)
-                completionHandler(.success(userProfile))
-                
-                
-            } catch let error {
-                dump(error)
-                completionHandler(.failure(.parsinError))
-            }
+            completionHandler(.success(data))
         })
         task.resume()
         
@@ -87,10 +60,8 @@ class DataStoreImp: DataStore {
             return
         }
         
-
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        
         
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
             
@@ -99,12 +70,7 @@ class DataStoreImp: DataStore {
                 return
             }
             
-            do {
-                completionHandler(.success(data))
-                
-            } catch _ {
-                completionHandler(.failure(.parsinError))
-            }
+            completionHandler(.success(data))
         })
         task.resume()
     }

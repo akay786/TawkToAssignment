@@ -13,11 +13,16 @@ protocol UsersService {
     var persistentContainer: NSPersistentContainer { get }
     
     func getUsersList(since: Int, completionHandler: @escaping (Result<[User], NetworkError>) -> Void)
-    func getUserProfile(userName: String, completionHandler: @escaping (Result<UserProfile, NetworkError>) -> Void)
+    func getUserProfile(userName: String, completionHandler: @escaping (Result<UserProfile?, NetworkError>) -> Void)
     
     
     func fetchLocalUserList(completionHandler: @escaping (_ users: [User]?) -> Void)
-    func saveInDatabase(jsonData: Data, completion: @escaping(_ users: [User]?) -> ())
+    func saveUsersInDB(jsonData: Data, completion: @escaping(_ users: [User]?) -> ())
+    func saveUserProfileInDB(jsonData: Data, completion: @escaping(_ users: UserProfile?) -> ())
+    func fetchProfileIfSavedOf(userName: String, completionHandler: @escaping (UserProfile?) -> Void)
+    func saveNotesOf(userName: String, withNotes: String, completionHandler: @escaping () -> Void)
+    func setStatusOfNotesAdded(userName: String, completionHandler: @escaping () -> Void)
+    func setStatusToSeenFor(userName: String, completionHandler: @escaping () -> Void)
 }
 
 class UsersServiceImp : UsersService {
@@ -38,7 +43,7 @@ class UsersServiceImp : UsersService {
             
             switch result {
                 case.success(let data):
-                    self.saveInDatabase(jsonData: data) { users in
+                    self.saveUsersInDB(jsonData: data) { users in
                         completionHandler(.success(users ?? []))
                     }
                     
@@ -48,9 +53,24 @@ class UsersServiceImp : UsersService {
         }
     }
 
-    func getUserProfile(userName: String, completionHandler: @escaping (Result<UserProfile, NetworkError>) -> Void) {
-        self.dataStore.getUserProfile(userName: userName) { result in
-            completionHandler(result)
+    func getUserProfile(userName: String, completionHandler: @escaping (Result<UserProfile?, NetworkError>) -> Void) {
+        self.fetchProfileIfSavedOf(userName: userName) { profile in
+            
+            if let userProfile = profile {
+                completionHandler(.success(userProfile))
+            } else {
+                self.dataStore.getUserProfile(userName: userName) { result in
+                    switch result {
+                        case.success(let data):
+                            self.saveUserProfileInDB(jsonData: data) { userProfile in
+                                completionHandler(.success(userProfile))
+                            }
+                            
+                        case .failure(let error):
+                            completionHandler(.failure(error))
+                    }
+                }
+            }
         }
     }
       
@@ -67,7 +87,7 @@ class UsersServiceImp : UsersService {
         }
     }
     
-    func saveInDatabase(jsonData: Data, completion: @escaping ([User]?) -> ()) {
+    func saveUsersInDB(jsonData: Data, completion: @escaping ([User]?) -> ()) {
         do {
             if let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext {
                 let managedObjectContext = persistentContainer.viewContext
@@ -82,4 +102,80 @@ class UsersServiceImp : UsersService {
             print(error)
         }
     }
+    
+    func saveUserProfileInDB(jsonData: Data, completion: @escaping (UserProfile?) -> ()) {
+        do {
+            if let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext {
+                let managedObjectContext = persistentContainer.viewContext
+                let decoder = JSONDecoder()
+                decoder.userInfo[codingUserInfoKeyManagedObjectContext] = managedObjectContext
+                let userProfile = try decoder.decode(UserProfile.self, from: jsonData)
+                try managedObjectContext.save()
+                completion(userProfile)
+            }
+            
+        } catch let error {
+            print(error)
+        }
+    }
+        
+    
+    func fetchProfileIfSavedOf(userName: String, completionHandler: @escaping (UserProfile?) -> Void) {
+        let managedObjectContext = persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<UserProfile>(entityName: "UserProfile")
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(format: "login LIKE %@", userName)
+        do {
+            let profile = try managedObjectContext.fetch(fetchRequest).first
+            completionHandler(profile)
+        } catch _ {
+            completionHandler(nil)
+        }
+    }
+    
+    func saveNotesOf(userName: String, withNotes: String, completionHandler: @escaping () -> Void) {
+        let managedObjectContext = persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<UserProfile>(entityName: "UserProfile")
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(format: "login = %@", userName)
+        do {
+            let profile = try managedObjectContext.fetch(fetchRequest).first
+            profile?.setValue(withNotes, forKey: "notes")
+            try managedObjectContext.save()
+            completionHandler()
+        } catch _ {
+            completionHandler()
+        }
+    }
+    
+    func setStatusToSeenFor(userName: String, completionHandler: @escaping () -> Void) {
+        let managedObjectContext = persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<User>(entityName: "User")
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(format: "login = %@", userName)
+        do {
+            let profile = try managedObjectContext.fetch(fetchRequest).first
+            profile?.setValue(true, forKey: "isSeen")
+            try managedObjectContext.save()
+            completionHandler()
+        } catch _ {
+            completionHandler()
+        }
+    }
+    
+    func setStatusOfNotesAdded(userName: String, completionHandler: @escaping () -> Void) {
+        let managedObjectContext = persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<User>(entityName: "User")
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(format: "login = %@", userName)
+        do {
+            let profile = try managedObjectContext.fetch(fetchRequest).first
+            profile?.setValue(true, forKey: "isNotesAdded")
+            try managedObjectContext.save()
+            completionHandler()
+        } catch _ {
+            completionHandler()
+        }
+    }
+    
 }

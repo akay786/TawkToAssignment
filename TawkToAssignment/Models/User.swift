@@ -20,7 +20,9 @@ class User: NSManagedObject, Decodable {
     @NSManaged var avatarURL: String?
     @NSManaged var type: String?
     @NSManaged var siteAdmin: Bool
-
+    @NSManaged var isNotesAdded: Bool
+    @NSManaged var isSeen: Bool
+    
     enum CodingKeys: String, CodingKey {
         case login
         case id

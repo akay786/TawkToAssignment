@@ -23,7 +23,7 @@ class UserProfileViewModelImpl: UserProfileViewModel {
     init(user: User, service: UsersService) {
         self.service = service
         self.user = user
-        self.fetchUserDetail()
+        
     }
     
     
@@ -34,8 +34,17 @@ class UserProfileViewModelImpl: UserProfileViewModel {
     
     
     //MARK: - Helper Methods
-    func fetchUserDetail() {
+    func viewDidLoad() {
         self.getUserProfile()
+    }
+    
+    func saveNotes(withText: String) {
+        self.service.saveNotesOf(userName: self.user.login ?? "", withNotes: withText) { [weak self] in
+            self?.service.setStatusOfNotesAdded(userName: self?.user.login ?? "", completionHandler: {
+                    
+                self?.completionHandler?(.showAlert(withMessage: "User notes updated"))
+            })
+        }
     }
     
 }
@@ -56,7 +65,7 @@ extension UserProfileViewModelImpl {
                 self?.userProfile = profile
                 self?.completionHandler?(.updateProfile)
                 
-            case .failure(let error):
+            case .failure(_):
                 break
             }
         }

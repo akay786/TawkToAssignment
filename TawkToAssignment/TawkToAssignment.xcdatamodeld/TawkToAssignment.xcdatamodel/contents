@@ -3,11 +3,26 @@
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="avatarURL" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isNotesAdded" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isSeen" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="login" optional="YES" attributeType="String"/>
         <attribute name="siteAdmin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="UserProfile" representedClassName=".UserProfile" syncable="YES">
+        <attribute name="avatarURL" optional="YES" attributeType="String"/>
+        <attribute name="followers" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="following" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="login" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="publicRepos" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="siteAdmin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="UserProfile" positionX="-54" positionY="27" width="128" height="14"/>
     </elements>
 </model>

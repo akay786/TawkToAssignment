@@ -26,7 +26,12 @@ class NormalUserListingCell: UITableViewCell, BaseUserListCell {
     
     @IBOutlet weak var userImageView: UIImageView!
     
-
+    @IBOutlet weak var outerView: UIView! {
+        didSet {
+            outerView.addShadowsOnly(offset: CGSize(width: 0, height: 0), color: UIColor.black, radius: 4, opacity: 0.20)
+        }
+    }
+    
     
     //MARK: - ViewModel Configuration
     func configure(viewModel: BaseUserListCellViewModel) {
@@ -36,6 +41,12 @@ class NormalUserListingCell: UITableViewCell, BaseUserListCell {
         
         self.userNameLabel.text = vm.userName
         self.userType.text = vm.userType
+        if vm.profileSeen {
+            self.outerView.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
+        } else {
+            self.outerView.backgroundColor = UIColor.white
+        }
+        
         DispatchQueue.global(qos: .userInteractive).async {
             if let imageUrl = vm.url {
                 self.userImageView.downloadImage(from: imageUrl)

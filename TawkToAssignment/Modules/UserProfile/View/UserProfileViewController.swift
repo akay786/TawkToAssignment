@@ -21,11 +21,18 @@ class UserProfileViewController: UIViewController {
         super.viewDidLoad()
 
         self.bindViewModel()
-        
+        self.viewModel?.viewDidLoad()
         self.view.backgroundColor = AppConstants.Colors.outerViewColor
     }
     
-
+    
+    //MARK: - Actions
+    @IBAction
+    func saveButton(_ sender: UIButton) {
+        self.viewModel?.saveNotes(withText: self.userProfileView.notesTextView.text)
+    }
+    
+    
 }
 
 //MARK: - ViewModel Binding
@@ -51,10 +58,22 @@ extension UserProfileViewController {
                 }
                 break
             
+            case .showAlert(let message):
+                DispatchQueue.main.async {
+                    guard let weakSelf = self else {
+                        return
+                    }
+                    
+                    AppConstants.showAlert(title: "", message: message, viewController: weakSelf)
+                }
             }
         }
     }
-    
+}
+
+
+//MARK: - Private Methods
+extension UserProfileViewController {
     
     private func initializeData() {
         guard let vM = self.viewModel,
@@ -68,9 +87,10 @@ extension UserProfileViewController {
         
         self.userProfileView.userFullNameLabel.text = profileDetail.name
         self.userProfileView.userNameLabel.text = profileDetail.login
-        self.userProfileView.publicReposCount.text = "\(profileDetail.publicRepos ?? 0)"
-        self.userProfileView.followingCount.text = "\(profileDetail.following ?? 0)"
-        self.userProfileView.followersCount.text = "\(profileDetail.followers ?? 0)"
+        self.userProfileView.publicReposCount.text = "\(profileDetail.publicRepos )"
+        self.userProfileView.followingCount.text = "\(profileDetail.following )"
+        self.userProfileView.followersCount.text = "\(profileDetail.followers )"
+        self.userProfileView.notesTextView.text = profileDetail.notes
         
         DispatchQueue.global(qos: .userInteractive).async {
             if let avatarUrl = profileDetail.avatarURL, let imageUrl = URL(string: avatarUrl) {

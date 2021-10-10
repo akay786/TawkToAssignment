@@ -6,78 +6,57 @@
 //
 
 import Foundation
+import CoreData
 
-class UserProfile: Codable {
-    var login: String?
-    var id: Int?
-    var nodeID: String?
-    var avatarURL: String?
-    var gravatarID: String?
-    var url, htmlURL, followersURL: String?
-    var followingURL, gistsURL, starredURL: String?
-    var subscriptionsURL, organizationsURL, reposURL: String?
-    var eventsURL: String?
-    var receivedEventsURL: String?
-    var type: String?
-    var siteAdmin: Bool?
-    var name, company, blog, location: String?
-    var email, bio, twitterUsername: String?
-    var publicRepos, publicGists, followers, following: Int?
-
+class UserProfile: NSManagedObject, Decodable {
+    
+    @NSManaged var login: String?
+    @NSManaged var id: Int16
+    @NSManaged var avatarURL: String?
+    @NSManaged var type: String?
+    @NSManaged var siteAdmin: Bool
+    @NSManaged var name: String?
+    @NSManaged var publicRepos, followers, following: Int16
+    @NSManaged var notes: String?
+    
     enum CodingKeys: String, CodingKey {
         case login, id
-        case nodeID = "node_id"
         case avatarURL = "avatar_url"
-        case gravatarID = "gravatar_id"
-        case url
-        case htmlURL = "html_url"
-        case followersURL = "followers_url"
-        case followingURL = "following_url"
-        case gistsURL = "gists_url"
-        case starredURL = "starred_url"
-        case subscriptionsURL = "subscriptions_url"
-        case organizationsURL = "organizations_url"
-        case reposURL = "repos_url"
-        case eventsURL = "events_url"
-        case receivedEventsURL = "received_events_url"
         case type
         case siteAdmin = "site_admin"
-        case name, company, blog, location, email, bio
-        case twitterUsername = "twitter_username"
+        case name
         case publicRepos = "public_repos"
-        case publicGists = "public_gists"
         case followers, following
     }
 
-    init(login: String?, id: Int?, nodeID: String?, avatarURL: String?, gravatarID: String?, url: String?, htmlURL: String?, followersURL: String?, followingURL: String?, gistsURL: String?, starredURL: String?, subscriptionsURL: String?, organizationsURL: String?, reposURL: String?, eventsURL: String?, receivedEventsURL: String?, type: String?, siteAdmin: Bool?, name: String?, company: String?, blog: String?, location: String?, email: String?, bio: String?, twitterUsername: String?, publicRepos: Int?, publicGists: Int?, followers: Int?, following: Int?, createdAt: Date?, updatedAt: Date?) {
-        self.login = login
-        self.id = id
-        self.nodeID = nodeID
-        self.avatarURL = avatarURL
-        self.gravatarID = gravatarID
-        self.url = url
-        self.htmlURL = htmlURL
-        self.followersURL = followersURL
-        self.followingURL = followingURL
-        self.gistsURL = gistsURL
-        self.starredURL = starredURL
-        self.subscriptionsURL = subscriptionsURL
-        self.organizationsURL = organizationsURL
-        self.reposURL = reposURL
-        self.eventsURL = eventsURL
-        self.receivedEventsURL = receivedEventsURL
-        self.type = type
-        self.siteAdmin = siteAdmin
-        self.name = name
-        self.company = company
-        self.blog = blog
-        self.location = location
-        self.email = email
-        self.bio = bio
-        self.twitterUsername = twitterUsername
-        self.publicRepos = publicRepos
-        self.publicGists = publicGists
-        self.followers = followers
-        self.following = following
+    
+    required convenience init(from decoder: Decoder) throws {
+        guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
+              let managedObjectContext = decoder.userInfo[codingUserInfoKeyManagedObjectContext] as? NSManagedObjectContext,
+              let entity = NSEntityDescription.entity(forEntityName: "UserProfile", in: managedObjectContext) else {
+
+            fatalError("Failed to decode User")
+        }
+        
+        self.init(entity: entity, insertInto: managedObjectContext)
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.login = try container.decodeIfPresent(String.self, forKey: .login)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.avatarURL = try container.decodeIfPresent(String.self, forKey: .avatarURL)
+        self.type = try container.decodeIfPresent(String.self, forKey: .type)
+        self.siteAdmin = try container.decodeIfPresent(Bool.self, forKey: .siteAdmin) ?? false
+        
+        let ID = try container.decodeIfPresent(Int.self, forKey: .id) ?? 0
+        let reposCount = try container.decodeIfPresent(Int.self, forKey: .publicRepos) ?? 0
+        let followersCount = try container.decodeIfPresent(Int.self, forKey: .followers) ?? 0
+        let followingCount = try container.decodeIfPresent(Int.self, forKey: .following) ?? 0
+        
+        self.id = Int16(ID)
+        self.publicRepos = Int16(reposCount)
+        self.followers = Int16(followersCount)
+        self.following = Int16(followingCount)
     }
+    
 }

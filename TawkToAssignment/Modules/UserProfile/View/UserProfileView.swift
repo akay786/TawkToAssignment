@@ -9,6 +9,14 @@ import UIKit
 
 class UserProfileView: UIView {
 
+    @IBOutlet weak var notesOuterView: UIView! {
+        didSet {
+            notesOuterView.layer.cornerRadius = 8
+            notesOuterView.layer.borderWidth = 1
+            notesOuterView.layer.borderColor = UIColor.gray.cgColor
+        }
+    }
+    
     @IBOutlet weak var userProfileImageOuterView: UIView! {
         didSet {
             userProfileImageOuterView.layer.masksToBounds = false
@@ -77,6 +85,28 @@ class UserProfileView: UIView {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
         didSet {
             activityIndicator.tintColor = AppConstants.Colors.primaryColor
+        }
+    }
+    
+    @IBOutlet weak var notesTextView: UITextView! {
+        didSet {
+            notesTextView.textColor = AppConstants.Colors.primaryColor
+            notesTextView.font = AppConstants.Font.regular(size: 14)
+        }
+    }
+    
+    @IBOutlet weak var saveButtonOuterView: UIView! {
+        didSet {
+            saveButtonOuterView.layer.cornerRadius = 8
+            saveButtonOuterView.backgroundColor = AppConstants.Colors.primaryColor
+        }
+    }
+    
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.titleLabel?.font = AppConstants.Font.medium(size: 14)
+            saveButton.setTitleColor(UIColor.white, for: .normal)
+            saveButton.setTitle("Save", for: .normal)
         }
     }
     

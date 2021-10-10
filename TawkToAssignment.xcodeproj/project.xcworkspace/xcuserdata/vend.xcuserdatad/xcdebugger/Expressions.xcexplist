@@ -10,5 +10,19 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "closure #1 in UserProfileViewModelImpl.getUserProfile():UserProfileViewModelImpl.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "profile?.avatarURL">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UsersListViewModelImp.refreshData(_:):UsersListViewModelImp.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in UsersServiceImp.getUserProfile(userName:completionHandler:):UsersService.swift">
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

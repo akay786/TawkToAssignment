@@ -20,11 +20,13 @@ protocol UserProfileViewModel {
     var title: String { get }
     var completionHandler: UserProfileViewModelOutputHandler? { get set }
     
-    func fetchUserDetail()
+    func viewDidLoad()
+    func saveNotes(withText: String)
 }
 
 enum UserProfileViewModelOutput {
     case showLoader
     case hideLoader
     case updateProfile
+    case showAlert(withMessage: String)
 }

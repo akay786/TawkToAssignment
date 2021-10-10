@@ -58,16 +58,38 @@ class UsersListViewModelImp: UsersListViewModel {
     }
     
     func tappedAtCell(index: Int) {
-        self.coordinatorDelegate?.didTapOnUser(user: self.users[index], delegate: self)
+        let user = self.users[index]
+        self.service.setStatusToSeenFor(userName: user.login ?? "") { [weak self] in
+            guard let weakSelf = self else {
+                return
+            }
+            
+            weakSelf.coordinatorDelegate?.didTapOnUser(user: user, delegate: weakSelf)
+        }
+        
     }
     
     func appendCellViewModels(for users: [User]) {
+        
         for user in users {
-            let vm = NormalUserListingCellViewModel(userName: user.login ?? "",
-                                                    userType: user.type ?? "",
-                                                    imageURL: URL(string: user.avatarURL ?? ""))
-            self.cellViewModels.append(vm)
+            
+            let viewModel: BaseUserListCellViewModel
+            
+            if user.isNotesAdded {
+                viewModel = NoteUserListingCellViewModel(userName: user.login ?? "",
+                                                        userType: user.type ?? "",
+                                                        imageURL: URL(string: user.avatarURL ?? ""),
+                                                        profileSeen: user.isSeen)
+            } else {
+                viewModel = NormalUserListingCellViewModel(userName: user.login ?? "",
+                                                        userType: user.type ?? "",
+                                                        imageURL: URL(string: user.avatarURL ?? ""),
+                                                        profileSeen: user.isSeen)
+            }
+            
+            self.cellViewModels.append(viewModel)
         }
+        
         self.completionHandler?(.refreshData)
     }
     
