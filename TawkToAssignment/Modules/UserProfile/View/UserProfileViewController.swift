@@ -20,6 +20,7 @@ class UserProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = viewModel?.title
         self.bindViewModel()
         self.viewModel?.viewDidLoad()
         self.view.backgroundColor = AppConstants.Colors.outerViewColor
