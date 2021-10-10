@@ -12,7 +12,6 @@
 		20455DD9270C55DB00CE1B37 /* TawkToAssignment.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20455DD7270C55DB00CE1B37 /* TawkToAssignment.xcdatamodeld */; };
 		20455DDB270C55DE00CE1B37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20455DDA270C55DE00CE1B37 /* Assets.xcassets */; };
 		20455DDE270C55DE00CE1B37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20455DDC270C55DE00CE1B37 /* LaunchScreen.storyboard */; };
-		20455DE9270C55DF00CE1B37 /* TawkToAssignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20455DE8270C55DF00CE1B37 /* TawkToAssignmentTests.swift */; };
 		20455DF4270C55DF00CE1B37 /* TawkToAssignmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20455DF3270C55DF00CE1B37 /* TawkToAssignmentUITests.swift */; };
 		20455E0F270C591100CE1B37 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20455E0E270C591100CE1B37 /* AppCoordinator.swift */; };
 		20455E14270C596100CE1B37 /* UsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20455E13270C596100CE1B37 /* UsersListViewController.swift */; };
@@ -52,6 +51,11 @@
 		20B9F71927137F200017A67D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B9F71827137F200017A67D /* Reachability.swift */; };
 		20B9F722271382E00017A67D /* SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20B9F721271382E00017A67D /* SearchBar.xib */; };
 		20B9F727271383650017A67D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B9F726271383650017A67D /* SearchBar.swift */; };
+		20B9F7332713A56A0017A67D /* UserListingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B9F7322713A56A0017A67D /* UserListingTests.swift */; };
+		20B9F7402713A7740017A67D /* DataStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B9F73F2713A7740017A67D /* DataStoreMock.swift */; };
+		20B9F7452713A8D70017A67D /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B9F7442713A8D60017A67D /* Stubs.swift */; };
+		20B9F74F2713AB5E0017A67D /* CoreDataMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B9F74E2713AB5E0017A67D /* CoreDataMock.swift */; };
+		20B9F7572713AF960017A67D /* UserProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B9F7562713AF960017A67D /* UserProfileTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +84,6 @@
 		20455DDD270C55DE00CE1B37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20455DDF270C55DE00CE1B37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20455DE4270C55DF00CE1B37 /* TawkToAssignmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TawkToAssignmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		20455DE8270C55DF00CE1B37 /* TawkToAssignmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TawkToAssignmentTests.swift; sourceTree = "<group>"; };
 		20455DEA270C55DF00CE1B37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20455DEF270C55DF00CE1B37 /* TawkToAssignmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TawkToAssignmentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20455DF3270C55DF00CE1B37 /* TawkToAssignmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TawkToAssignmentUITests.swift; sourceTree = "<group>"; };
@@ -123,6 +126,11 @@
 		20B9F71827137F200017A67D /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		20B9F721271382E00017A67D /* SearchBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchBar.xib; sourceTree = "<group>"; };
 		20B9F726271383650017A67D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		20B9F7322713A56A0017A67D /* UserListingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListingTests.swift; sourceTree = "<group>"; };
+		20B9F73F2713A7740017A67D /* DataStoreMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreMock.swift; sourceTree = "<group>"; };
+		20B9F7442713A8D60017A67D /* Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubs.swift; sourceTree = "<group>"; };
+		20B9F74E2713AB5E0017A67D /* CoreDataMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMock.swift; sourceTree = "<group>"; };
+		20B9F7562713AF960017A67D /* UserProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,7 +200,7 @@
 		20455DE7270C55DF00CE1B37 /* TawkToAssignmentTests */ = {
 			isa = PBXGroup;
 			children = (
-				20455DE8270C55DF00CE1B37 /* TawkToAssignmentTests.swift */,
+				20B9F7312713A5520017A67D /* UserListingTests */,
 				20455DEA270C55DF00CE1B37 /* Info.plist */,
 			);
 			path = TawkToAssignmentTests;
@@ -415,6 +423,18 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
+		20B9F7312713A5520017A67D /* UserListingTests */ = {
+			isa = PBXGroup;
+			children = (
+				20B9F7322713A56A0017A67D /* UserListingTests.swift */,
+				20B9F7562713AF960017A67D /* UserProfileTests.swift */,
+				20B9F73F2713A7740017A67D /* DataStoreMock.swift */,
+				20B9F7442713A8D60017A67D /* Stubs.swift */,
+				20B9F74E2713AB5E0017A67D /* CoreDataMock.swift */,
+			);
+			path = UserListingTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -592,7 +612,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20455DE9270C55DF00CE1B37 /* TawkToAssignmentTests.swift in Sources */,
+				20B9F74F2713AB5E0017A67D /* CoreDataMock.swift in Sources */,
+				20B9F7332713A56A0017A67D /* UserListingTests.swift in Sources */,
+				20B9F7402713A7740017A67D /* DataStoreMock.swift in Sources */,
+				20B9F7572713AF960017A67D /* UserProfileTests.swift in Sources */,
+				20B9F7452713A8D70017A67D /* Stubs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,6 +785,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7HBP6C9554;
 				INFOPLIST_FILE = TawkToAssignment/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -779,6 +804,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7HBP6C9554;
 				INFOPLIST_FILE = TawkToAssignment/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

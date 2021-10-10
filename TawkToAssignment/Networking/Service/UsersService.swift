@@ -26,8 +26,7 @@ protocol UsersService {
 }
 
 class UsersServiceImp : UsersService {
-    
-    
+
     var dataStore: DataStore
     var persistentContainer: NSPersistentContainer
     
@@ -39,7 +38,7 @@ class UsersServiceImp : UsersService {
     
     //MARK: - Private Methods
     func getUsersList(since: Int, completionHandler: @escaping (Result<[User], NetworkError>) -> Void) {
-        self.dataStore.getUsersList(since: since, persistentContainer: self.persistentContainer) { result in
+        self.dataStore.getUsersList(since: since) { result in
             
             switch result {
                 case.success(let data):

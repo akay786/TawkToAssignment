@@ -15,7 +15,7 @@ enum NetworkError: String, Error {
 }
 
 protocol DataStore {
-    func getUsersList(since: Int, persistentContainer: NSPersistentContainer, completionHandler: @escaping (Result<Data, NetworkError>) -> Void)
+    func getUsersList(since: Int, completionHandler: @escaping (Result<Data, NetworkError>) -> Void)
     func getUserProfile(userName: String, completionHandler: @escaping (Result<Data, NetworkError>) -> Void)
 }
 
@@ -49,7 +49,7 @@ class DataStoreImp: DataStore {
     /// This function returns users list from server.
     ///
     /// - Returns: A saved tv object array if successfully fetched and error object if failed
-    func getUsersList(since: Int, persistentContainer: NSPersistentContainer, completionHandler: @escaping (Result<Data, NetworkError>) -> Void) {
+    func getUsersList(since: Int, completionHandler: @escaping (Result<Data, NetworkError>) -> Void) {
         
         let urlComponents = NSURLComponents(string: AppConstants.EndPoints.getAllUsers)
         urlComponents?.queryItems = [

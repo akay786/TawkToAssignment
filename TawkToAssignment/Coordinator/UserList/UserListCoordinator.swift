@@ -48,7 +48,6 @@ extension UserListCoordinator : UsersListViewModelCoordinatorDelegate{
                                                     user: user,
                                                     persistentContainer: self.container)
         if let userProfileVC = userProfileCoordinator.start() as? UserProfileViewController {
-            //userProfileVC.viewModel.delegate = delegate
             self.rootViewController.pushViewController(userProfileVC, animated: true)
         }
     }
