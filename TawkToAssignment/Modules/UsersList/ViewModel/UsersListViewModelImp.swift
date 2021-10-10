@@ -70,21 +70,31 @@ class UsersListViewModelImp: UsersListViewModel {
     }
     
     func appendCellViewModels(for users: [User]) {
-        
+        var count = 0
         for user in users {
+            count = count + 1
             
             let viewModel: BaseUserListCellViewModel
             
-            if user.isNotesAdded {
-                viewModel = NoteUserListingCellViewModel(userName: user.login ?? "",
-                                                        userType: user.type ?? "",
-                                                        imageURL: URL(string: user.avatarURL ?? ""),
-                                                        profileSeen: user.isSeen)
+            if count % 4 == 0 {
+                viewModel = InvertedUserListingCellViewModel(userName: user.login ?? "",
+                                                             userType: user.type ?? "",
+                                                             imageURL: URL(string: user.avatarURL ?? ""),
+                                                             profileSeen: user.isSeen,
+                                                             notesAdded: user.isNotesAdded)
+                
             } else {
-                viewModel = NormalUserListingCellViewModel(userName: user.login ?? "",
-                                                        userType: user.type ?? "",
-                                                        imageURL: URL(string: user.avatarURL ?? ""),
-                                                        profileSeen: user.isSeen)
+                if user.isNotesAdded {
+                    viewModel = NoteUserListingCellViewModel(userName: user.login ?? "",
+                                                             userType: user.type ?? "",
+                                                             imageURL: URL(string: user.avatarURL ?? ""),
+                                                             profileSeen: user.isSeen)
+                } else {
+                    viewModel = NormalUserListingCellViewModel(userName: user.login ?? "",
+                                                               userType: user.type ?? "",
+                                                               imageURL: URL(string: user.avatarURL ?? ""),
+                                                               profileSeen: user.isSeen)
+                }
             }
             
             self.cellViewModels.append(viewModel)
