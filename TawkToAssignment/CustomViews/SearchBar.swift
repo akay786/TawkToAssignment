@@ -9,7 +9,6 @@ import UIKit
 
 protocol SearchViewDelegate: class {
     func searchText(text: String)
-    func emptyText()
 }
 
 class SearchBar: UIView {
@@ -120,10 +119,6 @@ class SearchBar: UIView {
                                          selector: #selector(timerCalled),
                                          userInfo: ["searchString": "\(searchString)"],
                                          repeats: false)
-        }
-        
-        if searchString.count == 0 {
-            self.delegate?.emptyText()
         }
     }
     

@@ -9,10 +9,6 @@ import Foundation
 
 typealias UserProfileViewModelOutputHandler = (UserProfileViewModelOutput) -> ()
 
-//protocol UsersListViewModelCoordinatorDelegate : class {
-//    func didTapOnUser(user: User, delegate: UsersListViewModelImp)
-//}
-
 protocol UserProfileViewModel {
     
     var service : UsersService { get }

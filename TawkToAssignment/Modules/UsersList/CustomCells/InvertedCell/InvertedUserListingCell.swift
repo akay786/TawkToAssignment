@@ -49,11 +49,11 @@ class InvertedUserListingCell: UITableViewCell, BaseUserListCell {
             self.outerView.backgroundColor = UIColor.white
         }
         
-        userImageView.isHidden = !vm.isNotesAdded
+        notesIcon.isHidden = !vm.isNotesAdded
         
         DispatchQueue.global(qos: .userInteractive).async {
             if let imageUrl = vm.url {
-                self.userImageView.downloadImage(from: imageUrl, invertImage: true)
+                self.userImageView.downloadImage(from: imageUrl)
             }
         }
         

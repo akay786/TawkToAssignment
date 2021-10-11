@@ -19,8 +19,6 @@
 		20455E38270C5A0600CE1B37 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20455E33270C5A0500CE1B37 /* UIView.swift */; };
 		20455E39270C5A0600CE1B37 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20455E34270C5A0500CE1B37 /* UIColor.swift */; };
 		20455E3A270C5A0600CE1B37 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20455E35270C5A0500CE1B37 /* Storyboard.swift */; };
-		20455E3B270C5A0600CE1B37 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20455E36270C5A0500CE1B37 /* UITextField.swift */; };
-		20455E3C270C5A0600CE1B37 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20455E37270C5A0500CE1B37 /* Bundle.swift */; };
 		20455E47270C5A3100CE1B37 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20455E44270C5A3100CE1B37 /* DataStore.swift */; };
 		20455E48270C5A3100CE1B37 /* UsersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20455E46270C5A3100CE1B37 /* UsersService.swift */; };
 		20455E54270C5B1700CE1B37 /* UsersListingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20455E53270C5B1700CE1B37 /* UsersListingView.swift */; };
@@ -94,8 +92,6 @@
 		20455E33270C5A0500CE1B37 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		20455E34270C5A0500CE1B37 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		20455E35270C5A0500CE1B37 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
-		20455E36270C5A0500CE1B37 /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
-		20455E37270C5A0500CE1B37 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		20455E44270C5A3100CE1B37 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		20455E46270C5A3100CE1B37 /* UsersService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersService.swift; sourceTree = "<group>"; };
 		20455E53270C5B1700CE1B37 /* UsersListingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListingView.swift; sourceTree = "<group>"; };
@@ -249,8 +245,6 @@
 				20455E33270C5A0500CE1B37 /* UIView.swift */,
 				20455E34270C5A0500CE1B37 /* UIColor.swift */,
 				20455E35270C5A0500CE1B37 /* Storyboard.swift */,
-				20455E36270C5A0500CE1B37 /* UITextField.swift */,
-				20455E37270C5A0500CE1B37 /* Bundle.swift */,
 				20B9F6CC271311DD0017A67D /* UITableView.swift */,
 				20B9F6D12713230B0017A67D /* UIImageView.swift */,
 			);
@@ -591,10 +585,8 @@
 				20B9F6752712F31B0017A67D /* UsersListViewModelImp.swift in Sources */,
 				20455DD9270C55DB00CE1B37 /* TawkToAssignment.xcdatamodeld in Sources */,
 				20455E48270C5A3100CE1B37 /* UsersService.swift in Sources */,
-				20455E3B270C5A0600CE1B37 /* UITextField.swift in Sources */,
 				20455E14270C596100CE1B37 /* UsersListViewController.swift in Sources */,
 				20455DCF270C55DB00CE1B37 /* AppDelegate.swift in Sources */,
-				20455E3C270C5A0600CE1B37 /* Bundle.swift in Sources */,
 				20B9F6A8271311210017A67D /* NoteUserListingCellViewModel.swift in Sources */,
 				20B9F65E2712ED860017A67D /* User.swift in Sources */,
 				20B9F6C8271311940017A67D /* NormalUserListingCellViewModel.swift in Sources */,

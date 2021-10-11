@@ -50,15 +50,7 @@ class AppConstants {
         static func regular(size: CGFloat) -> UIFont? {
             return UIFont(name: "AvenirNext-Regular", size: size)
         }
-        
-        static func heavy(size: CGFloat) -> UIFont? {
-            return UIFont(name: "AvenirNext-Heavy", size: size)
-        }
-        
-        static func light(size: CGFloat) -> UIFont? {
-            return UIFont(name: "Avenir-Light", size: size)
-        }
-        
+    
     }
     
 }

@@ -131,8 +131,4 @@ extension UsersListViewController: SearchViewDelegate {
         self.viewModel?.searchUser(text: text)
     }
     
-    func emptyText() {
-            
-    }
-    
 }

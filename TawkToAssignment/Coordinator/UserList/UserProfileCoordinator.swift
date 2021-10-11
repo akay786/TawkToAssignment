@@ -41,16 +41,6 @@ class UserProfileCoordinator: Coordinator {
 }
 
 
-////MARK: - AddTVShow Coordinator Delegate
-//extension UserProfileCoordinator: AddTvShowCoordinatorDelegate {
-//    
-//    func pop() {
-//        self.navigationController.popViewController(animated: true)
-//    }
-//    
-//}
-
-
 //MARK: - StoryboardInitializable
 extension UserProfileCoordinator: StoryboardInitializable {
     
