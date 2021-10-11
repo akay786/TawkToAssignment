@@ -53,7 +53,7 @@ class InvertedUserListingCell: UITableViewCell, BaseUserListCell {
         
         DispatchQueue.global(qos: .userInteractive).async {
             if let imageUrl = vm.url {
-                self.userImageView.downloadImage(from: imageUrl)
+                self.userImageView.downloadImage(from: imageUrl, invertImage: true)
             }
         }
         

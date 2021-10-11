@@ -31,7 +31,7 @@ extension UIImageView {
     
     
     //MARK: - Get Image From Cache or From Api
-    func downloadImage(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
+    func downloadImage(from url: URL, contentMode mode: ContentMode = .scaleAspectFit, invertImage: Bool = false) {
         if let cacheImage = imageCache.object(forKey: url.absoluteString as AnyObject) as? UIImage {
             DispatchQueue.main.async { [weak self] in
                 self?.image = cacheImage
